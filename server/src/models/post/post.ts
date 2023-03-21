@@ -1,4 +1,5 @@
 import db from '../../db/connector';
+import moment from "moment";
 
 interface PostDto {
     id: number;
@@ -19,7 +20,11 @@ class Post {
     }
 
     async Save() {
+        const sql: string = `
+            INSERT INTO post(title, body, writer, createdAt) 
+            VALUES('${this.title}', '${this.body}', '${this.writer}', '${moment(Date.now()).format('YYYY-MM-DD HH:mm:ss')}')`;
 
+        await db.execute(sql);
     }
 
     static async FindAll(): Promise<PostDto[]> {
