@@ -8,9 +8,31 @@ const GetAllPosts = async (req: Request, res: Response) => {
 }
 
 const WritePost = async (req: Request, res: Response) => {
-    const post = new Post('title1', 'body1', 'writer1');
+    const {title, body, writer}: { title: string, body: string, writer: string } = req.body;
 
-    await post.Save();
+    const post = new Post(title, body, writer);
+    try {
+        const result = await post.Save();
+        res.status(200).json(result);
+    } catch (e) {
+        res.status(500).json(e);
+
+    }
 }
 
-export {GetAllPosts, WritePost};
+const GetPost = async (req: Request, res: Response) => {
+    const id: number = parseInt(req.params.id);
+    if(isNaN(id)) {
+        return res.status(400).json({msg: `invalid params ${id}`});
+    }
+
+    try {
+        const post = await Post.Find(id);
+        res.status(200).json(post);
+    } catch (e) {
+
+        res.status(500).json(e);
+    }
+}
+
+export {GetAllPosts, WritePost, GetPost};

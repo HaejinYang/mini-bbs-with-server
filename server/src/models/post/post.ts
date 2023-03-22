@@ -1,5 +1,4 @@
 import db from '../../db/connector';
-import moment from "moment";
 
 interface PostDto {
     id: number;
@@ -10,9 +9,9 @@ interface PostDto {
 }
 
 class Post {
-    private title: string;
-    private body: string;
-    private writer: string;
+    private readonly title: string;
+    private readonly body: string;
+    private readonly writer: string;
     constructor(title: string, body: string, writer: string) {
         this.title = title;
         this.body = body;
@@ -21,19 +20,37 @@ class Post {
 
     async Save() {
         const sql: string = `
-            INSERT INTO post(title, body, writer, createdAt) 
-            VALUES('${this.title}', '${this.body}', '${this.writer}', '${moment(Date.now()).format('YYYY-MM-DD HH:mm:ss')}')`;
+            INSERT INTO post(id, title, body, writer, createdAt) 
+            VALUES(1, '${this.title}', '${this.body}', '${this.writer}', '${this.GetDateForTimestamp(new Date())}')`;
 
-        await db.execute(sql);
+        // result.affectedRows;
+        return db.execute(sql);
     }
 
     static async FindAll(): Promise<PostDto[]> {
         const sql: string = "SELECT * FROM post";
-
         const [posts]: [PostDto[]] = await db.execute(sql);
-        console.log(posts);
-
+        // posts.length
         return posts;
+    }
+
+    static async Find(id: number): Promise<PostDto> {
+        const sql: string = `SELECT * FROM post WHERE id = ${id}`;
+        const [post]: [PostDto[]] = await db.execute(sql);
+        // posts.length
+
+        return post[0];
+    }
+
+    private GetDateForTimestamp(date: Date) {
+        const YYYY = date.getFullYear();
+        const MM = date.getMonth() + 1;
+        const DD = date.getDate();
+        const hh = date.getHours();
+        const mm = date.getMinutes();
+        const ss = date.getSeconds();
+
+        return `${YYYY}-${MM}-${DD} ${hh}-${mm}-${ss}`;
     }
 }
 

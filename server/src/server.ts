@@ -8,7 +8,10 @@ dotenvExpand.expand(dotenv.config());
 const app = express();
 const port: number = Number.parseInt(process.env.SERVER_PORT!);
 
+app.use(express.json());
+
 app.use('/api', postRouter);
 app.listen(port, () => {
     console.log(`server is running... port: ${port}`);
+
 })
