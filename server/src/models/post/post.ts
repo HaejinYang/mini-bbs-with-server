@@ -1,9 +1,18 @@
 import db from '../../db/connector';
+import {Expose} from "class-transformer";
+import {IsDefined, Length} from "class-validator";
 
-interface PostDto {
+@Expose()
+class PostDto {
     id: number;
+    @Length(1, 32)
+    @IsDefined()
     title: string;
+    @Length(1, 128)
+    @IsDefined()
     body: string;
+    @Length(1, 16)
+    @IsDefined()
     writer: string;
     createdAt: Date;
 }
@@ -20,10 +29,9 @@ class Post {
 
     async Save() {
         const sql: string = `
-            INSERT INTO post(id, title, body, writer, createdAt) 
-            VALUES(1, '${this.title}', '${this.body}', '${this.writer}', '${this.GetDateForTimestamp(new Date())}')`;
+            INSERT INTO post(title, body, writer, createdAt) 
+            VALUES('${this.title}', '${this.body}', '${this.writer}', '${this.GetDateForTimestamp(new Date())}')`;
 
-        // result.affectedRows;
         return db.execute(sql);
     }
 
@@ -55,3 +63,4 @@ class Post {
 }
 
 export default Post;
+export {PostDto};
