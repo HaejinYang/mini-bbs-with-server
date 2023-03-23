@@ -1,6 +1,7 @@
 import db from '../../db/connector';
 import {Expose} from "class-transformer";
 import {IsDefined, Length} from "class-validator";
+import {GetDateForTimestamp} from "../../common/util";
 
 @Expose()
 class PostDto {
@@ -30,7 +31,7 @@ class Post {
     async Save() {
         const sql: string = `
             INSERT INTO post(title, body, writer, createdAt) 
-            VALUES('${this.title}', '${this.body}', '${this.writer}', '${this.GetDateForTimestamp(new Date())}')`;
+            VALUES('${this.title}', '${this.body}', '${this.writer}', '${GetDateForTimestamp(new Date())}')`;
 
         return db.execute(sql);
     }
@@ -48,17 +49,6 @@ class Post {
         // posts.length
 
         return post[0];
-    }
-
-    private GetDateForTimestamp(date: Date) {
-        const YYYY = date.getFullYear();
-        const MM = date.getMonth() + 1;
-        const DD = date.getDate();
-        const hh = date.getHours();
-        const mm = date.getMinutes();
-        const ss = date.getSeconds();
-
-        return `${YYYY}-${MM}-${DD} ${hh}-${mm}-${ss}`;
     }
 }
 
