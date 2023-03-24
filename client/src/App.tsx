@@ -42,22 +42,22 @@ function CreateTestList() {
         id: 1,
         title: "안녕하세요",
         writer: "홍길동",
-        content: "Lorem ipsum dolor sit amet. A harum consequatur et cumque reiciendis sed dolor eius et nobis inventore sit eligendi voluptatem. Et alias deserunt ut vero similique qui aperiam obcaecati non consequuntur cumque qui galisum itaque est natus ratione quo incidunt asperiores.",
+        body: "Lorem ipsum dolor sit amet. A harum consequatur et cumque reiciendis sed dolor eius et nobis inventore sit eligendi voluptatem. Et alias deserunt ut vero similique qui aperiam obcaecati non consequuntur cumque qui galisum itaque est natus ratione quo incidunt asperiores.",
         createdAt: new Date().toLocaleDateString()
     });
-    posts.push({id: 2, title: "글제목2", writer: "김영희", content: "", createdAt: new Date().toLocaleDateString()});
+    posts.push({id: 2, title: "글제목2", writer: "김영희", body: "", createdAt: new Date().toLocaleDateString()});
     posts.push({
         id: 3,
         title: "글제목3",
         writer: "테스트게시자",
-        content: "게시글내용",
+        body: "게시글내용",
         createdAt: new Date().toLocaleDateString()
     });
-    posts.push({id: 4, title: "타이틀4", writer: "게시자4", content: "게시글내용", createdAt: new Date().toLocaleDateString()});
-    posts.push({id: 5, title: "타이틀5", writer: "게시자5", content: "게시글내용", createdAt: new Date().toLocaleDateString()});
-    posts.push({id: 6, title: "타이틀6", writer: "게시자6", content: "게시글내용", createdAt: new Date().toLocaleDateString()});
-    posts.push({id: 7, title: "타이틀7", writer: "게시자7", content: "게시글내용", createdAt: new Date().toLocaleDateString()});
-    posts.push({id: 8, title: "타이틀8", writer: "게시자8", content: "게시글내용", createdAt: new Date().toLocaleDateString()});
+    posts.push({id: 4, title: "타이틀4", writer: "게시자4", body: "게시글내용", createdAt: new Date().toLocaleDateString()});
+    posts.push({id: 5, title: "타이틀5", writer: "게시자5", body: "게시글내용", createdAt: new Date().toLocaleDateString()});
+    posts.push({id: 6, title: "타이틀6", writer: "게시자6", body: "게시글내용", createdAt: new Date().toLocaleDateString()});
+    posts.push({id: 7, title: "타이틀7", writer: "게시자7", body: "게시글내용", createdAt: new Date().toLocaleDateString()});
+    posts.push({id: 8, title: "타이틀8", writer: "게시자8", body: "게시글내용", createdAt: new Date().toLocaleDateString()});
 
     localStorage.setItem('post', JSON.stringify(posts));
 

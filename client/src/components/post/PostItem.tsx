@@ -24,7 +24,7 @@ const PostItem: FC<PostType> = (props) => {
         <Wrapper>
             <PostStyle>
                 <h2>{props.title}</h2>
-                <p>{props.content}</p>
+                <p>{props.body}</p>
             </PostStyle>
         </Wrapper>
     )

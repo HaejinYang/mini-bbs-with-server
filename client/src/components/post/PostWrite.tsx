@@ -67,7 +67,7 @@ const PostWrite = () => {
         store({
             id: nextId,
             title: head,
-            content: body,
+            body: body,
             writer: `작성자${nextId}`,
             createdAt: (new Date()).toLocaleDateString()
         });
