@@ -3,18 +3,22 @@ import {Expose} from "class-transformer";
 import {IsDefined, Length} from "class-validator";
 import {GetDateForTimestamp} from "../../common/util";
 
-@Expose()
 class PostDto {
+    @Expose()
     id: number;
+    @Expose()
     @Length(1, 32)
     @IsDefined()
     title: string;
+    @Expose()
     @Length(1, 128)
     @IsDefined()
     body: string;
+    @Expose()
     @Length(1, 16)
     @IsDefined()
     writer: string;
+    @Expose()
     createdAt: Date;
 }
 

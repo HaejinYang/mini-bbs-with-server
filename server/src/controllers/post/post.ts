@@ -48,7 +48,7 @@ const WritePost = async (req: Request, res: Response) => {
     } catch (e) {
         const retMsg: ResultMsg = {
             result: false,
-            msg: "저장 실패"
+            msg: `저장 실패. ${JSON.stringify(e)}`
         }
         res.status(500).json(retMsg);
     }
