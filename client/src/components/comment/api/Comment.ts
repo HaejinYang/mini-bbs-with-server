@@ -1,6 +1,6 @@
-import {CommonResponse} from "./Response";
-import {CommentType} from "../../comment/Comment";
-import {PostViewEachResponse} from "./PostViewAPI";
+import {CommonResponse} from "../../common/api/Response";
+import {CommentType} from "../Comment";
+import {PostViewEachResponse} from "../../post/api/PostViewAPI";
 import exp from "constants";
 
 interface CommentsResponse extends CommonResponse {

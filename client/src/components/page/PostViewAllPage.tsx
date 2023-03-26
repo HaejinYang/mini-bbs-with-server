@@ -1,8 +1,8 @@
 import PostCardListContainer from "../post/PostCardListContainer";
 import PostCardList from "../post/PostCardList";
 import React, {useEffect, useState} from "react";
-import {FetchPostViewAll} from "./api/PostViewAPI";
-import {PostType} from "../types";
+import {FetchPostViewAll} from "../post/api/PostViewAPI";
+import {PostType} from "../post/PostItem";
 
 const PostViewAllPage = () => {
     const [posts, setPosts] = useState<PostType[]>([]);

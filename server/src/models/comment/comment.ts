@@ -36,7 +36,7 @@ class CommentInPost {
     }
 
     static async GetCommentsInPost(postId: number): Promise<CommentDto[]> {
-        const sql = `SELECT comment.commentId, comment.postId, comment.body, comment.writer, comment.createdAt FROM comment, post WHERE comment.postId = post.id`;
+        const sql = `SELECT comment.commentId, comment.postId, comment.body, comment.writer, comment.createdAt FROM comment, post WHERE comment.postId = post.id and post.id = ${postId}`;
 
         const [result]: [CommentDto[]] = await db.execute(sql);
 

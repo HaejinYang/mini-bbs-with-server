@@ -1,5 +1,5 @@
-import {PostType} from "../../types";
-import {CommonResponse} from "./Response";
+import {CommonResponse} from "../../common/api/Response";
+import { PostType } from "../PostItem";
 
 interface PostViewAllResponse extends CommonResponse{
 

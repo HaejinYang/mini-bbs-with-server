@@ -1,13 +1,12 @@
 import React, {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
-import PostItem from "../post/PostItem";
+import PostItem, {PostType} from "../post/PostItem";
 import CommentList from "../comment/CommentList";
 import {CommentType} from "../comment/Comment";
 import styled from "styled-components";
 import CommentWrite from "../comment/CommentWrite";
-import {FetchPostViewEach, PostViewEachResponse} from "./api/PostViewAPI";
-import {PostType} from "../types";
-import {CommentsResponse, FetchComments} from "./api/Comment";
+import {FetchPostViewEach, PostViewEachResponse} from "../post/api/PostViewAPI";
+import {CommentsResponse, FetchComments} from "../comment/api/Comment";
 
 type ParamType = {
     id: string;
