@@ -1,13 +1,13 @@
 import {CommonResponse} from "../../common/api/Response";
 import {CommentType} from "../Comment";
-import {PostViewEachResponse} from "../../post/api/PostViewAPI";
-import exp from "constants";
+
+type RequestWriteCommentType = Pick<CommentType, "postId" | "body" | "writer">
 
 interface CommentsResponse extends CommonResponse {
     comments: CommentType[];
 }
 
-const FetchComments = async (id: number): Promise<CommentsResponse> => {
+const RequestGetComments = async (id: number): Promise<CommentsResponse> => {
     try {
         const response = await fetch(`/api/comments/${id}`, {
             method: 'GET',
@@ -28,5 +28,21 @@ const FetchComments = async (id: number): Promise<CommentsResponse> => {
     }
 }
 
-export {FetchComments};
+const RequestWriteComment = async (comment: RequestWriteCommentType) => {
+    try {
+        const res = await fetch('/api/comment/write', {
+            method: 'POST',
+            mode: 'cors',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(comment)
+        });
+    } catch (e) {
+
+    }
+}
+
+export {RequestGetComments, RequestWriteComment};
 export type {CommentsResponse};

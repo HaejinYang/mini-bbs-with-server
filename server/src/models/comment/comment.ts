@@ -3,18 +3,21 @@ import {GetDateForTimestamp} from "../../common/util";
 import {Expose} from "class-transformer";
 import {IsDefined, Length} from "class-validator";
 
-@Expose()
 class CommentDto {
+    @Expose()
     commentId: number;
+    @Expose()
     @IsDefined()
     postId: number;
+    @Expose()
     @Length(1, 256)
     @IsDefined()
     body: string;
-
+    @Expose()
     @Length(1, 64)
     @IsDefined()
     writer: string;
+    @Expose()
     createdAt: Date;
 }
 

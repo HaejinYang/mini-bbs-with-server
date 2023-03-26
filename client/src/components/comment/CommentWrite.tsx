@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import {FC, MouseEvent, useState, ChangeEvent} from "react";
-import { CommentType } from "./Comment";
+import {RequestWriteComment} from "./api/Comment";
+import {useNavigate} from "react-router-dom";
 
 const Container = styled.div`
   display: flex;
@@ -32,10 +33,13 @@ interface CommentWriteProps {
 
 const CommentWrite: FC<CommentWriteProps> = (props) => {
     const [comment, setComment] = useState("");
-    const onClick = (e: MouseEvent<HTMLButtonElement>) => {
+    const navigate = useNavigate();
 
+    const onClick = (e: MouseEvent<HTMLButtonElement>) => {
+        RequestWriteComment({body: comment, writer: "댓글작성자", postId: props.postId});
         // new comment write
         setComment("");
+        navigate(0);
     }
 
     const onChange = (e: ChangeEvent<HTMLTextAreaElement>) => {

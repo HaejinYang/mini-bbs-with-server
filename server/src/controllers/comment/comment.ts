@@ -57,14 +57,14 @@ const WriteComment = async (req: Request, res: Response) => {
         const retMsg: ResultMsgWriteComment = {
             result: true,
             msg: "댓글 쓰기 성공",
-            id: result.insertId
+            id: result[0].insertId
         };
 
         res.status(200).json(retMsg);
     } catch (e) {
         const retMsg: ResultMsg = {
             result: false,
-            msg: "댓글 쓰기 실패"
+            msg: `댓글 쓰기 실패: ${JSON.stringify(e)}`
         };
 
         res.status(400).json(retMsg);

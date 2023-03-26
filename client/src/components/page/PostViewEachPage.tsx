@@ -6,7 +6,7 @@ import {CommentType} from "../comment/Comment";
 import styled from "styled-components";
 import CommentWrite from "../comment/CommentWrite";
 import {FetchPostViewEach, PostViewEachResponse} from "../post/api/PostViewAPI";
-import {CommentsResponse, FetchComments} from "../comment/api/Comment";
+import {CommentsResponse, RequestGetComments} from "../comment/api/Comment";
 
 type ParamType = {
     id: string;
@@ -32,13 +32,14 @@ const Container = styled.div`
     3. 포스트와 댓글을 보여줌
  */
 const PostViewEachPage = () => {
-    const [post, setPost] = useState<PostType >({
+    const [post, setPost] = useState<PostType>({
         id: -1,
         writer: "",
         body: "",
         title: "",
         createdAt: "",
     });
+
     const [comments, setComments] = useState<CommentType[]>([]);
     const {id} = useParams<ParamType>();
 
@@ -57,7 +58,8 @@ const PostViewEachPage = () => {
     // 2. 댓글을 가져옴
     useEffect(() => {
         const fetchComments = async () => {
-            const response: CommentsResponse = await FetchComments(parseInt(id!));
+            console.log("called");
+            const response: CommentsResponse = await RequestGetComments(parseInt(id!));
             if(response.comments) {
                 setComments(response.comments);
             }
