@@ -1,25 +1,29 @@
 import {PostType} from "../../types";
+import {CommonResponse} from "./Response";
 
-interface IPostViewAllResponse {
-    result: boolean;
-    msg: string;
+interface PostViewAllResponse extends CommonResponse{
+
     posts: PostType[];
 };
 
-const FetchPostViewAll =  async (): Promise<IPostViewAllResponse> => {
+interface PostViewEachResponse extends CommonResponse {
+    post?: PostType;
+}
+
+const FetchPostViewAll =  async (): Promise<PostViewAllResponse> => {
     try {
         const response = await fetch('/api/post/all', {
             method: 'GET',
             mode: "cors"
         });
 
-        const data: IPostViewAllResponse = await response.json();
+        const data: PostViewAllResponse = await response.json();
 
         return data;
     } catch (e) {
-        const data: IPostViewAllResponse = {
+        const data: PostViewAllResponse = {
             result: false,
-            msg: "데이터를 가져올 수 없음",
+            msg: `데이터를 가져올 수 없음. ${JSON.stringify(e)}`,
             posts: []
         };
 
@@ -27,5 +31,25 @@ const FetchPostViewAll =  async (): Promise<IPostViewAllResponse> => {
     }
 }
 
-export {FetchPostViewAll};
-export type {IPostViewAllResponse};
+const FetchPostViewEach = async (postId: number): Promise<PostViewEachResponse> => {
+    try {
+        const response = await fetch(`/api/post/${postId}`, {
+            method: 'GET',
+            mode: 'cors'
+        })
+
+        const data: PostViewEachResponse = await response.json();
+
+        return data;
+    } catch(e) {
+        const data: PostViewEachResponse = {
+            result: false,
+            msg: `데이터를 가져올 수 없음. ${JSON.stringify(e)}`,
+        };
+
+        return data;
+    }
+}
+
+export {FetchPostViewAll, FetchPostViewEach};
+export type {PostViewAllResponse, PostViewEachResponse};

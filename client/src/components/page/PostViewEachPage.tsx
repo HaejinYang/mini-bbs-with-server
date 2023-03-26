@@ -1,14 +1,13 @@
-import React, {useContext, useEffect, useReducer} from "react";
+import React, {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
 import PostItem from "../post/PostItem";
 import CommentList from "../comment/CommentList";
 import {CommentType} from "../comment/Comment";
 import styled from "styled-components";
 import CommentWrite from "../comment/CommentWrite";
-import comment from "../comment/Comment";
-import CommentReducer from "../comment/reducer/CommentReducer";
-import PostContext from "../post/context/PostContext";
-import CommentContext from "../comment/context/CommentContext";
+import {FetchPostViewEach, PostViewEachResponse} from "./api/PostViewAPI";
+import {PostType} from "../types";
+import {CommentsResponse, FetchComments} from "./api/Comment";
 
 type ParamType = {
     id: string;
@@ -28,36 +27,52 @@ const Container = styled.div`
   width: 450px;
 `
 
+/*
+    1. 포스트를 가져옴
+    2. 댓글을 가져옴
+    3. 포스트와 댓글을 보여줌
+ */
 const PostViewEachPage = () => {
+    const [post, setPost] = useState<PostType >({
+        id: -1,
+        writer: "",
+        body: "",
+        title: "",
+        createdAt: "",
+    });
+    const [comments, setComments] = useState<CommentType[]>([]);
     const {id} = useParams<ParamType>();
-    const [commentState, commentDispatch] = useReducer(CommentReducer, {comments: JSON.parse(localStorage.getItem('comment')!)});
-    const postState = useContext(PostContext);
+
+    // 1. 포스트를 가져옴
     useEffect(() => {
-        return () => {
-            console.log("unmounted");
+        const fetchPost = async () => {
+            const response: PostViewEachResponse =  await FetchPostViewEach(parseInt(id!));
+            if(response.post) {
+                setPost(response.post);
+            }
         }
+
+        fetchPost();
     }, []);
 
-    const commentStore = (comment: CommentType): void => {
-        commentDispatch({type: 'STORE', comment});
-    }
+    // 2. 댓글을 가져옴
+    useEffect(() => {
+        const fetchComments = async () => {
+            const response: CommentsResponse = await FetchComments(parseInt(id!));
+            if(response.comments) {
+                setComments(response.comments);
+            }
+        }
+
+        fetchComments();
+    }, []);
 
     return (
         <Wrapper>
             <Container>
-                {postState.posts.filter((post) => {
-                    return post.id === Number(id);
-                }).map(item => {
-                    return (
-                        <PostItem key={item.id} {...item} />
-                    )
-                })}
-                <CommentList comments={commentState.comments.filter((comment) => {
-                    return comment.postId === Number(id);
-                })}/>
-                <CommentContext.Provider value={{comments: commentState.comments, store: commentStore}}>
-                    <CommentWrite postId={Number(id)}></CommentWrite>
-                </CommentContext.Provider>
+                <PostItem {...post} />
+                <CommentList comments={comments} />
+                <CommentWrite postId={Number(id)}></CommentWrite>
             </Container>
         </Wrapper>
     );

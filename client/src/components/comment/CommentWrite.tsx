@@ -39,7 +39,7 @@ const CommentWrite: FC<CommentWriteProps> = (props) => {
             return accId < cur.commentId ? cur.commentId : accId;
         }, -1) + 1;
 
-        const newComment: CommentType = {postId: props.postId, content: comment, commentId};
+        const newComment: CommentType = {postId: props.postId, body: comment, commentId};
         store(newComment);
         setComment("");
     }

@@ -12,8 +12,6 @@ import PostWritePage from "./components/page/PostWritePage";
 import PostViewAllPage from "./components/page/PostViewAllPage";
 
 function App() {
-    CreateTestList();
-
     const [postState, postDispatch] = useReducer(PostReducer, {posts: JSON.parse(localStorage.getItem('post')!)});
 
     const postStore = (post: PostType): void => {
@@ -34,44 +32,6 @@ function App() {
             </PostContext.Provider>
         </BrowserRouter>
     );
-}
-
-function CreateTestList() {
-    const posts: PostType[] = [];
-    posts.push({
-        id: 1,
-        title: "안녕하세요",
-        writer: "홍길동",
-        body: "Lorem ipsum dolor sit amet. A harum consequatur et cumque reiciendis sed dolor eius et nobis inventore sit eligendi voluptatem. Et alias deserunt ut vero similique qui aperiam obcaecati non consequuntur cumque qui galisum itaque est natus ratione quo incidunt asperiores.",
-        createdAt: new Date().toLocaleDateString()
-    });
-    posts.push({id: 2, title: "글제목2", writer: "김영희", body: "", createdAt: new Date().toLocaleDateString()});
-    posts.push({
-        id: 3,
-        title: "글제목3",
-        writer: "테스트게시자",
-        body: "게시글내용",
-        createdAt: new Date().toLocaleDateString()
-    });
-    posts.push({id: 4, title: "타이틀4", writer: "게시자4", body: "게시글내용", createdAt: new Date().toLocaleDateString()});
-    posts.push({id: 5, title: "타이틀5", writer: "게시자5", body: "게시글내용", createdAt: new Date().toLocaleDateString()});
-    posts.push({id: 6, title: "타이틀6", writer: "게시자6", body: "게시글내용", createdAt: new Date().toLocaleDateString()});
-    posts.push({id: 7, title: "타이틀7", writer: "게시자7", body: "게시글내용", createdAt: new Date().toLocaleDateString()});
-    posts.push({id: 8, title: "타이틀8", writer: "게시자8", body: "게시글내용", createdAt: new Date().toLocaleDateString()});
-
-    localStorage.setItem('post', JSON.stringify(posts));
-
-    const comments: CommentType[] = [];
-    comments.push({postId: 1, commentId: 1, content: "안녕하세요."});
-    comments.push({postId: 1, commentId: 2, content: "반갑습니다."});
-    comments.push({postId: 1, commentId: 3, content: "환영합니다."});
-    comments.push({postId: 1, commentId: 4, content: "어서오세요."});
-    comments.push({postId: 2, commentId: 5, content: "이쪽입니다."});
-    comments.push({postId: 2, commentId: 6, content: "저쪽입니다."});
-    comments.push({postId: 2, commentId: 7, content: "여기로가세요."});
-    comments.push({postId: 1, commentId: 8, content: "저기로가세요."});
-
-    localStorage.setItem('comment', JSON.stringify(comments));
 }
 
 export default App;

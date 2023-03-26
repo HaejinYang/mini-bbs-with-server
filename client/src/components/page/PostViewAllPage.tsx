@@ -15,6 +15,7 @@ const PostViewAllPage = () => {
 
         fetchData();
     }, []);
+
     return (
         <PostCardListContainer>
             <PostCardList posts={posts}/>
