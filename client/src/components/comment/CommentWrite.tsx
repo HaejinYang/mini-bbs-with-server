@@ -1,7 +1,6 @@
 import styled from "styled-components";
-import {FC, useContext, MouseEvent, useState, ChangeEvent} from "react";
+import {FC, MouseEvent, useState, ChangeEvent} from "react";
 import { CommentType } from "./Comment";
-import CommentContext from "./context/CommentContext";
 
 const Container = styled.div`
   display: flex;
@@ -32,15 +31,10 @@ interface CommentWriteProps {
 }
 
 const CommentWrite: FC<CommentWriteProps> = (props) => {
-    const {store, comments} = useContext(CommentContext);
     const [comment, setComment] = useState("");
     const onClick = (e: MouseEvent<HTMLButtonElement>) => {
-        const commentId: number = comments.reduce((accId, cur) => {
-            return accId < cur.commentId ? cur.commentId : accId;
-        }, -1) + 1;
 
-        const newComment: CommentType = {postId: props.postId, body: comment, commentId};
-        store(newComment);
+        // new comment write
         setComment("");
     }
 

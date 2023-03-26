@@ -1,7 +1,6 @@
 import {MouseEvent, ChangeEvent, FormEvent, useContext, useState} from "react";
 import styled from "styled-components";
 import {useNavigate} from 'react-router-dom';
-import PostContext from "./context/PostContext";
 
 interface TextAreaProps {
     height: number;
@@ -50,31 +49,17 @@ const ButtonStyle = styled.button`
 const PostWrite = () => {
     const [head, setHead] = useState("");
     const [body, setBody] = useState("");
-    const {posts, store} = useContext(PostContext);
     const navigate = useNavigate();
 
     const onSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        const nextId = posts.reduce((accId: number, current) => {
-            if (accId < current.id) {
-                return current.id;
-            } else {
-                return accId;
-            }
-        }, -1) + 1;
-
-        store({
-            id: nextId,
-            title: head,
-            body: body,
-            writer: `작성자${nextId}`,
-            createdAt: (new Date()).toLocaleDateString()
-        });
+        // write to server
         setHead("");
         setBody("");
 
-        navigate(`/post/${nextId}`);
+        // navigate posted id
+        // navigate(`/post/${nextId}`);
     }
 
     const onChangeHead = (e: ChangeEvent<HTMLTextAreaElement>) => {
