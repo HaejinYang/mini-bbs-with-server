@@ -4,7 +4,9 @@ import styled from "styled-components";
 interface CommentType {
     postId: number;
     commentId: number;
-    content: string;
+    body: string;
+    writer?: string;
+    createdAt?: Date;
 }
 
 const PStyle = styled.p`
@@ -17,7 +19,7 @@ const PStyle = styled.p`
 const Comment: FC<CommentType> = (prop) => {
     return (
         <div>
-            <PStyle>{prop.content}</PStyle>
+            <PStyle>{prop.body}</PStyle>
         </div>
     )
 }

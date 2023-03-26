@@ -33,7 +33,6 @@ const GetAllPosts = async (req: Request, res: Response) => {
 
 const WritePost = async (req: Request, res: Response) => {
     const reqPost: PostDto = plainToInstance(PostDto, req.body, {excludeExtraneousValues: true});
-
     try {
         await validateOrReject(reqPost, {skipMissingProperties: true}); // validateOrReject
         const post = new Post(reqPost.title, reqPost.body, reqPost.writer);
@@ -41,14 +40,14 @@ const WritePost = async (req: Request, res: Response) => {
         const retMsg: ResultMsgWritePost = {
             result: true,
             msg: "저장 성공",
-            id: result.insertId
+            id: result[0].insertId
         }
 
         res.status(200).json(retMsg);
     } catch (e) {
         const retMsg: ResultMsg = {
             result: false,
-            msg: "저장 실패"
+            msg: `저장 실패. ${JSON.stringify(e)}`
         }
         res.status(500).json(retMsg);
     }

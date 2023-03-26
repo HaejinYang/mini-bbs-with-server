@@ -1,4 +1,4 @@
-import {PostType} from "../../types";
+import { PostType } from "../PostItem";
 
 interface PostReducerState {
     posts: PostType[];

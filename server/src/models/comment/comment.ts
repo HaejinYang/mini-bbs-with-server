@@ -3,18 +3,21 @@ import {GetDateForTimestamp} from "../../common/util";
 import {Expose} from "class-transformer";
 import {IsDefined, Length} from "class-validator";
 
-@Expose()
 class CommentDto {
+    @Expose()
     commentId: number;
+    @Expose()
     @IsDefined()
     postId: number;
+    @Expose()
     @Length(1, 256)
     @IsDefined()
     body: string;
-
+    @Expose()
     @Length(1, 64)
     @IsDefined()
     writer: string;
+    @Expose()
     createdAt: Date;
 }
 
@@ -36,7 +39,7 @@ class CommentInPost {
     }
 
     static async GetCommentsInPost(postId: number): Promise<CommentDto[]> {
-        const sql = `SELECT comment.commentId, comment.postId, comment.body, comment.writer, comment.createdAt FROM comment, post WHERE comment.postId = post.id`;
+        const sql = `SELECT comment.commentId, comment.postId, comment.body, comment.writer, comment.createdAt FROM comment, post WHERE comment.postId = post.id and post.id = ${postId}`;
 
         const [result]: [CommentDto[]] = await db.execute(sql);
 

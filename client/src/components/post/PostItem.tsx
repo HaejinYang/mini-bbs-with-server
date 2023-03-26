@@ -1,6 +1,10 @@
 import {FC} from "react";
-import {PostType} from "../types";
+import {PostCardProps} from "../post/PostCard";
 import styled from "styled-components";
+
+interface PostType extends PostCardProps{
+    body: string;
+};
 
 const Wrapper = styled.div`
   width: 100%;
@@ -24,10 +28,11 @@ const PostItem: FC<PostType> = (props) => {
         <Wrapper>
             <PostStyle>
                 <h2>{props.title}</h2>
-                <p>{props.content}</p>
+                <p>{props.body}</p>
             </PostStyle>
         </Wrapper>
     )
 }
 
 export default PostItem;
+export  type {PostType};

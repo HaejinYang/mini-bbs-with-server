@@ -1,7 +1,7 @@
-import {MouseEvent, ChangeEvent, FormEvent, useContext, useState} from "react";
+import {MouseEvent, ChangeEvent, FormEvent, useState} from "react";
 import styled from "styled-components";
 import {useNavigate} from 'react-router-dom';
-import PostContext from "./context/PostContext";
+import {RequestPostWrite} from "./api/PostWriteAPI";
 
 interface TextAreaProps {
     height: number;
@@ -48,37 +48,31 @@ const ButtonStyle = styled.button`
 `
 
 const PostWrite = () => {
-    const [head, setHead] = useState("");
+    const [title, setTitle] = useState("");
     const [body, setBody] = useState("");
-    const {posts, store} = useContext(PostContext);
     const navigate = useNavigate();
 
     const onSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        const nextId = posts.reduce((accId: number, current) => {
-            if (accId < current.id) {
-                return current.id;
-            } else {
-                return accId;
-            }
-        }, -1) + 1;
+        const request = async () => {
+            const postId: number = await RequestPostWrite({title, body, writer: "작성자입니다"});
 
-        store({
-            id: nextId,
-            title: head,
-            content: body,
-            writer: `작성자${nextId}`,
-            createdAt: (new Date()).toLocaleDateString()
-        });
-        setHead("");
-        setBody("");
+            return postId;
+        }
 
-        navigate(`/post/${nextId}`);
+        request().then((nextId) => {
+            // write to server
+            setTitle("");
+            setBody("");
+
+            // navigate posted id
+            navigate(`/post/${nextId}`);
+        })
     }
 
     const onChangeHead = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        setHead(e.target.value);
+        setTitle(e.target.value);
     }
 
     const onChangeBody = (e: ChangeEvent<HTMLTextAreaElement>) => {
@@ -96,7 +90,7 @@ const PostWrite = () => {
                 <ButtonStyle type="button" onClick={onBack}>뒤로가기</ButtonStyle>
             </ButtonContainer>
             <form onSubmit={onSubmit}>
-                <TextArea height={50} placeholder="글 제목" value={head} onChange={onChangeHead}></TextArea> <br/>
+                <TextArea height={50} placeholder="글 제목" value={title} onChange={onChangeHead}></TextArea> <br/>
                 <TextArea height={400} placeholder="글 내용" value={body} onChange={onChangeBody}></TextArea> <br/>
                 <ButtonStyle type="submit">작성완료</ButtonStyle>
             </form>
