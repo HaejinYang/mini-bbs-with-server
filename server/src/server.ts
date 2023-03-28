@@ -14,11 +14,11 @@ dotenvExpand.expand(dotenv.config());
 const app = express();
 const port: number = Number.parseInt(process.env.SERVER_PORT!);
 
-const corsOption = {
-    origin: 'http://127.0.0.1:3000'
-};
-
-app.use(cors(corsOption));
+// const corsOption = {
+//     origin: 'http://localhost:3000'
+// };
+//
+// app.use(cors(corsOption));
 app.use(express.json());
 
 const accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), {flags: 'a'})
