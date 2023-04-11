@@ -16,6 +16,7 @@ const NavBar = () => {
             <NavItem linkPath="/" text="처음화면"/>
             <NavItem linkPath="/post/all" text="글목록보기"/>
             <NavItem linkPath="/post/write" text="글쓰기"/>
+            <NavItem linkPath="/sign" text="로그인"/>
         </Container>
     )
 }
