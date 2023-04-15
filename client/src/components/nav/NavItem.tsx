@@ -1,10 +1,10 @@
-import {FC} from "react";
+import React, {FC} from "react";
 import {Link} from "react-router-dom";
 import styled from "styled-components";
 
 interface NavItemProps {
     linkPath: string;
-    text: string;
+    children: React.ReactNode;
 }
 
 const LinkStyle = styled(Link)`
@@ -22,10 +22,10 @@ const LinkStyle = styled(Link)`
   }
 `;
 
-const NavItem: FC<NavItemProps> = ({linkPath, text}) => {
+const NavItem: FC<NavItemProps> = (props) => {
     return (
         <div>
-            <LinkStyle to={linkPath}>{text}</LinkStyle>
+            <LinkStyle to={props.linkPath}>{props.children}</LinkStyle>
         </div>
     );
 }

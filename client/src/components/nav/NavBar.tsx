@@ -27,7 +27,6 @@ const Button = styled.button`
 `
 
 const Span = styled.span`
-  flex-grow: 1;
   color: rgb(230, 0, 35);
   font-weight: bold;
   
@@ -45,10 +44,11 @@ const NavBar = () => {
 
     return (
         <Container>
-            <Span><Span>MINI</Span> 미니게시판</Span>
-            <NavItem linkPath="/" text="처음화면"/>
-            <NavItem linkPath="/post/all" text="글목록보기"/>
-            <NavItem linkPath="/post/write" text="글쓰기"/>
+            <span style={{flexGrow: 1}}>
+                <NavItem linkPath="/"> <Span><Span>MINI</Span> 미니게시판</Span></NavItem>
+            </span>
+            <NavItem linkPath="/post/all">글목록보기</NavItem>
+            <NavItem linkPath="/post/write">글쓰기</NavItem>
             <Button onClick={() => {
                 setSign(true);
             }

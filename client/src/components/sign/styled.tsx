@@ -25,10 +25,6 @@ const Container = styled.div`
     cursor: pointer;
   }
   
-  button:hover {
-    background-color: rgba(0 0 0 / 0.1);
-  }
-  
   span {
     text-align: center;
     font-weight: bold;
@@ -53,7 +49,7 @@ const FormContainer = styled.form`
     padding: 1rem;
     border: 1px solid gray;
     border-radius: 10px;
-    box-shadow: rgba(0, 0, 0, 0.45) 0px 2px 5px;
+    box-shadow: rgba(0, 0, 0, 0.45) 0px 0px 2px;
   }
   
   input[type="submit"], button {
@@ -66,10 +62,15 @@ const FormContainer = styled.form`
     color: white;
     font-weight: bold;
     box-shadow: none;
+    
   }
   
   button {
     background-color: rgb(24, 119, 242);
+  }
+  
+  input[type="submit"]:hover, button:hover {
+    filter: brightness(0.9);
   }
   
   span {
