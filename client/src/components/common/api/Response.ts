@@ -1,6 +1,6 @@
 interface CommonResponse {
-    result: boolean,
-    msg: string,
-};
+  result: boolean;
+  msg: string;
+}
 
-export type {CommonResponse};
+export type { CommonResponse };

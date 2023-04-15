@@ -1,10 +1,10 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import SignUp from "./SignUp";
 import SignIn from "./SignIn";
 import styled from "styled-components";
 
 interface SignProps {
-    onClose(): void;
+  onClose(): void;
 }
 
 const Layout = styled.div`
@@ -22,21 +22,23 @@ const Layout = styled.div`
 `;
 
 const Sign: React.FC<SignProps> = (props) => {
-    const [form, setForm] = useState('sign-in');
+  const [form, setForm] = useState("sign-in");
 
-    const switchForm = (name: string) => {
-        setForm(name);
-    }
+  const switchForm = (name: string) => {
+    setForm(name);
+  };
 
-    return (
-        <>
-            <Layout>
-                {
-                    form === "sign-in" ? <SignIn onFormSwitch={switchForm} onClose={props.onClose}/> : <SignUp onFormSwitch={switchForm} onClose={props.onClose}/>
-                }
-            </Layout>
-        </>
-    );
-}
+  return (
+    <>
+      <Layout>
+        {form === "sign-in" ? (
+          <SignIn onFormSwitch={switchForm} onClose={props.onClose} />
+        ) : (
+          <SignUp onFormSwitch={switchForm} onClose={props.onClose} />
+        )}
+      </Layout>
+    </>
+  );
+};
 
 export default Sign;

@@ -1,59 +1,62 @@
-import db from '../../db/connector';
-import {Expose} from "class-transformer";
-import {IsDefined, Length} from "class-validator";
-import {GetDateForTimestamp} from "../../common/util";
+import db from "../../db/connector";
+import { Expose } from "class-transformer";
+import { IsDefined, Length } from "class-validator";
+import { GetDateForTimestamp } from "../../common/util";
 
 class PostDto {
-    @Expose()
-    id: number;
-    @Expose()
-    @Length(1, 32)
-    @IsDefined()
-    title: string;
-    @Expose()
-    @Length(1, 128)
-    @IsDefined()
-    body: string;
-    @Expose()
-    @Length(1, 16)
-    @IsDefined()
-    writer: string;
-    @Expose()
-    createdAt: Date;
+  @Expose()
+  id: number;
+  @Expose()
+  @Length(1, 32)
+  @IsDefined()
+  title: string;
+  @Expose()
+  @Length(1, 128)
+  @IsDefined()
+  body: string;
+  @Expose()
+  @Length(1, 16)
+  @IsDefined()
+  writer: string;
+  @Expose()
+  createdAt: Date;
 }
 
 class Post {
-    private readonly title: string;
-    private readonly body: string;
-    private readonly writer: string;
-    constructor(title: string, body: string, writer: string) {
-        this.title = title;
-        this.body = body;
-        this.writer = writer;
-    }
+  private readonly title: string;
+  private readonly body: string;
+  private readonly writer: string;
 
-    async Save() {
-        const sql: string = `
+  constructor(title: string, body: string, writer: string) {
+    this.title = title;
+    this.body = body;
+    this.writer = writer;
+  }
+
+  async Save() {
+    const sql: string = `
             INSERT INTO post(title, body, writer, createdAt) 
-            VALUES('${this.title}', '${this.body}', '${this.writer}', '${GetDateForTimestamp(new Date())}')`;
+            VALUES('${this.title}', '${this.body}', '${
+      this.writer
+    }', '${GetDateForTimestamp(new Date())}')`;
 
-        return db.execute(sql);
-    }
+    return db.execute(sql);
+  }
 
-    static async FindAll(): Promise<PostDto[]> {
-        const sql: string = "SELECT * FROM post";
-        const [posts]: [PostDto[]] = await db.execute(sql);
-        // posts.length
-        return posts;
-    }
+  static async FindAll(): Promise<PostDto[]> {
+    const sql: string = "SELECT * FROM post";
+    const [posts]: [PostDto[]] = await db.execute(sql);
+    // posts.length
+    return posts;
+  }
 
-    static async Find(id: number): Promise<PostDto> {
-        const sql: string = `SELECT * FROM post WHERE id = ${id}`;
-        const [post]: [PostDto[]] = await db.execute(sql);
-        // posts.length
+  static async Find(id: number): Promise<PostDto> {
+    const sql: string = `SELECT * FROM post WHERE id = ${id}`;
+    const [post]: [PostDto[]] = await db.execute(sql);
+    // posts.length
 
-        return post[0];
-    }
+    return post[0];
+  }
 }
 
 export default Post;
