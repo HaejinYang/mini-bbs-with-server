@@ -30,7 +30,7 @@ const FormContainer = styled.form`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 1rem 3rem;
+  padding: 0.5rem 4rem 2rem 4rem;
   border: 1px solid white;
   border-radius: 10px;
   
@@ -83,6 +83,11 @@ const CenteredSpan = styled.span`
 const FocusSpan = styled.span`
   text-align: center;
   font-weight: bold;
-`
+`;
 
-export {Container, FormContainer, FocusSpan, CenteredSpan, CursorSpan};
+const InvalidFormItemSpan = styled.span`
+  color: #e60023;
+  font-size: 11px;
+`;
+
+export {Container, FormContainer, FocusSpan, CenteredSpan, CursorSpan, InvalidFormItemSpan};
