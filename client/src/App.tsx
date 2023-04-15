@@ -19,7 +19,6 @@ function App() {
                     <Route path="write" element={<PostWritePage/>}></Route>
                     <Route path="all" element={<PostViewAllPage/>}></Route>
                 </Route>
-                <Route path="/sign" element={<Sign/>}></Route>
             </Routes>
         </BrowserRouter>
     );

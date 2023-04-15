@@ -3,6 +3,7 @@ import {Container, FormContainer} from "./styled";
 
 interface SignUpProps {
     onFormSwitch(name: string): void;
+    onClose(): void;
 }
 
 const SignUp: React.FC<SignUpProps> = (props) => {

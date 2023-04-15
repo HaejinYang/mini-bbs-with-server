@@ -8,16 +8,17 @@ interface NavItemProps {
 }
 
 const LinkStyle = styled(Link)`
-  padding: 6px;
-  
+  padding: 10px;
+  font-weight: bold;
   text-decoration: none;
+  
   &:focus, &:hover, &:visited, &:link, &:active {
     color: black;
     text-decoration: none;
   }
   
   &:hover {
-    background-color: rgb(0 0 0 / 0.05);
+    text-decoration: underline;
   }
 `;
 
