@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {Container, FormContainer} from "./styled";
+import {CenteredSpan, Container, CursorSpan, FocusSpan, FormContainer} from "./styled";
 import {useNavigate} from "react-router-dom";
 
 interface SignInProps {
@@ -17,10 +17,10 @@ const SignIn: React.FC<SignInProps> = (props) => {
                 props.onClose();
             }
             }>X</button>
-            <span>
+            <FocusSpan>
                 미니 게시판에 오신 것을<br/>
                 환영합니다
-            </span>
+            </FocusSpan>
             <FormContainer>
                 <label htmlFor="email">email</label>
                 <input id="email" name="email" placeholder="example@gmail.com" type="text" value={email}
@@ -28,9 +28,9 @@ const SignIn: React.FC<SignInProps> = (props) => {
                 <label htmlFor="password-first">비밀번호</label>
                 <input id="password" name="password" placeholder="********" type="password" value={password}
                        onChange={e => setPassword(e.target.value)}/>
-                <span>비밀번호를 잊으셨나요?</span>
+                <CursorSpan>비밀번호를 잊으셨나요?</CursorSpan>
                 <input type="submit" value="로그인"/>
-                <span>또는</span>
+                <CenteredSpan>또는</CenteredSpan>
                 <button onClick={e => props.onFormSwitch("sign-up")}>가입</button>
             </FormContainer>
         </Container>

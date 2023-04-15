@@ -11,7 +11,7 @@ const Container = styled.div`
   background-color: white;
   box-shadow: rgba(0, 0, 0, 0.45) 0px 2px 5px;
   
-  button:first-child {
+  & > button {
     font-size: 20px;
     font-weight: bold;
     margin-top: 5px;
@@ -24,12 +24,7 @@ const Container = styled.div`
     background-color: white;
     cursor: pointer;
   }
-  
-  span {
-    text-align: center;
-    font-weight: bold;
-  }
-`
+`;
 
 const FormContainer = styled.form`
   display: flex;
@@ -62,7 +57,6 @@ const FormContainer = styled.form`
     color: white;
     font-weight: bold;
     box-shadow: none;
-    
   }
   
   button {
@@ -72,18 +66,23 @@ const FormContainer = styled.form`
   input[type="submit"]:hover, button:hover {
     filter: brightness(0.9);
   }
-  
-  span {
-    color: gray;
-    text-align: center;
-  }
-  
-  span:first-of-type {
-    text-align: left;
-    color: black;
-    padding: 0.5rem 0;
-    cursor: pointer;
-  }
+`;
+
+const CursorSpan = styled.span`
+  text-align: left;
+  color: black;
+  padding: 0.5rem 0;
+  cursor: pointer;
+`;
+
+const CenteredSpan = styled.span`
+  color: gray;
+  text-align: center;
+`;
+
+const FocusSpan = styled.span`
+  text-align: center;
+  font-weight: bold;
 `
 
-export {Container, FormContainer};
+export {Container, FormContainer, FocusSpan, CenteredSpan, CursorSpan};
