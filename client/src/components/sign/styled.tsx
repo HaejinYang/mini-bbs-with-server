@@ -10,7 +10,7 @@ const Container = styled.div`
   color: black;
   background-color: white;
   box-shadow: rgba(0, 0, 0, 0.45) 0px 2px 5px;
-  
+
   & > button {
     font-size: 20px;
     font-weight: bold;
@@ -33,21 +33,22 @@ const FormContainer = styled.form`
   padding: 0.5rem 4rem 2rem 4rem;
   border: 1px solid white;
   border-radius: 10px;
-  
+
   label {
     color: gray;
     text-align: left;
     padding: 0.5rem 0;
   }
-  
+
   input {
     padding: 1rem;
     border: 1px solid gray;
     border-radius: 10px;
     box-shadow: rgba(0, 0, 0, 0.45) 0px 0px 2px;
   }
-  
-  input[type="submit"], button {
+
+  input[type="submit"],
+  button {
     margin-top: 0.5rem;
     background-color: #e60023;
     cursor: pointer;
@@ -58,12 +59,13 @@ const FormContainer = styled.form`
     font-weight: bold;
     box-shadow: none;
   }
-  
+
   button {
     background-color: rgb(24, 119, 242);
   }
-  
-  input[type="submit"]:hover, button:hover {
+
+  input[type="submit"]:hover,
+  button:hover {
     filter: brightness(0.9);
   }
 `;
@@ -90,4 +92,11 @@ const InvalidFormItemSpan = styled.span`
   font-size: 11px;
 `;
 
-export {Container, FormContainer, FocusSpan, CenteredSpan, CursorSpan, InvalidFormItemSpan};
+export {
+  Container,
+  FormContainer,
+  FocusSpan,
+  CenteredSpan,
+  CursorSpan,
+  InvalidFormItemSpan,
+};
