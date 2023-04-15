@@ -6,6 +6,7 @@ import HomePage from "./components/page/HomePage";
 import NavBar from "./components/nav/NavBar";
 import PostWritePage from "./components/page/PostWritePage";
 import PostViewAllPage from "./components/page/PostViewAllPage";
+import Sign from "./components/sign/Sign";
 
 function App() {
     return (

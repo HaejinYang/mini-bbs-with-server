@@ -20,7 +20,7 @@ const Span = styled.span`
 const PostCardListContainer:FC<ContainerProps> = (props) => {
     return (
         <section>
-            <h3>글 목록 보기</h3>
+            <h3 style={{fontWeight: "normal"}}>글 목록 보기</h3>
             <Header>
                 <Span>번호</Span>
                 <Span>글제목</Span>
