@@ -25,16 +25,22 @@ const SignUp: React.FC<SignUpProps> = (props) => {
         if (!ValidateEmail(email)) {
             setEmailValid(false);
             isValid = false;
+        } else {
+            setEmailValid(true);
         }
 
         if (!ValidateNickname(nickname)) {
             setNicknameValid(false);
             isValid = false;
+        } else {
+            setNicknameValid(true);
         }
 
-        if (passwordFirst !== passwordSecond || ValidatePassword(passwordFirst)) {
+        if (passwordFirst !== passwordSecond || !ValidatePassword(passwordFirst)) {
             setPasswordValid(false);
             isValid = false;
+        } else {
+            setPasswordValid(true);
         }
 
         if (isValid) {

@@ -21,11 +21,15 @@ const SignIn: React.FC<SignInProps> = (props) => {
         if(!ValidateEmail(email)) {
             setEmailValid(false);
             isInvalid = true;
+        } else {
+            setEmailValid(true);
         }
 
-        if(ValidatePassword(password)) {
+        if(!ValidatePassword(password)) {
             setPasswordValid(false);
             isInvalid = true;
+        } else {
+            setPasswordValid(true);
         }
 
         if(!isInvalid) {

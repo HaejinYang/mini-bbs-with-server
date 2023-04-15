@@ -3,7 +3,8 @@ const ValidateEmail = (email: string): boolean => {
 };
 
 const ValidateNickname = (name: string): boolean => {
-    return !(/[^a-z|A-Z|0-9|ㄱ-ㅎ|가-힣]/g.test(name));
+    console.log(name.length);
+    return !(/[^a-z|A-Z|0-9|ㄱ-ㅎ|가-힣]/g.test(name)) && name.length >= 2;
 }
 
 const ValidatePassword = (password: string): boolean => {
